@@ -1,4 +1,4 @@
-# streamlit_app.py (V8 - 终极稳定版)
+# streamlit_app.py 
 
 import streamlit as st
 import os
@@ -9,7 +9,7 @@ import together
 
 # --- 页面配置 ---
 st.set_page_config(
-    page_title="ProtaMind - 植物对话专家",
+    page_title="ProtaMind - Your experts for plant identification",
     page_icon="🌿",
     layout="centered", # 使用居中布局，更适合对话
     initial_sidebar_state="auto"
@@ -112,8 +112,8 @@ def get_llava_response(messages):
             yield chunk.choices[0].delta.content
 
 # --- Streamlit 主界面 ---
-st.title("🌿 ProtaMind 植物对话专家")
-st.caption("上传植物图片，开启与植物专家的深度对话")
+st.title("🌿 ProtaMind-Experts for plant identification")
+st.caption("Start your exploration!")
 
 # --- 对话历史记录展示 ---
 # 【重大简化】不再有复杂的解析和显示逻辑，统一用标准聊天方式展示
@@ -131,7 +131,7 @@ for message in st.session_state.messages:
 # --- 图片上传与处理 ---
 # 将上传控件放在主界面，流程更清晰
 image_buffer = st.file_uploader(
-    "上传您的植物图片...", 
+    "Upload your photos of plants...", 
     type=['png', 'jpg', 'jpeg', 'webp'],
     # 当对话开始后，禁用上传，除非用户选择重置
     disabled=len(st.session_state.messages) > 0
@@ -140,7 +140,7 @@ image_buffer = st.file_uploader(
 # 只有在没有对话，并且用户上传了新图片时，才处理
 if not st.session_state.messages and image_buffer:
     # 立即处理首次请求
-    with st.spinner("Protamind正在观察您的植物..."):
+    with st.spinner("Protamind is analyzing..."):
         # 1. 将图片转为 Base64
         image_base64 = base64.b64encode(image_buffer.getvalue()).decode("utf-8")
         
@@ -167,7 +167,7 @@ if not st.session_state.messages and image_buffer:
 # --- 对话输入框 ---
 # 只有对话开始后（即有消息历史），才显示对话框
 if len(st.session_state.messages) > 0:
-    if prompt := st.chat_input("针对这株植物继续提问..."):
+    if prompt := st.chat_input("More questions..."):
         # 1. 将用户的新问题加入历史并显示
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
@@ -186,6 +186,6 @@ if len(st.session_state.messages) > 0:
 
 # --- 重置按钮 ---
 if len(st.session_state.messages) > 0:
-    if st.button("识别新的植物"):
+    if st.button("Identify new plants"):
         st.session_state.clear()
         st.rerun()
