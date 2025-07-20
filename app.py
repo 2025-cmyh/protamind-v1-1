@@ -9,7 +9,7 @@ import together
 
 # --- 页面配置 ---
 st.set_page_config(
-    page_title="ProtaMind - Your experts for plant identification",
+    page_title="ProtaMind - Your expert for plant identification",
     page_icon="🌿",
     layout="centered", # 使用居中布局，更适合对话
     initial_sidebar_state="auto"
