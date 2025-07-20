@@ -135,7 +135,7 @@ image_buffer = st.file_uploader(
 # 只有在没有对话，并且用户上传了新图片时，才处理
 if not st.session_state.messages and image_buffer:
     # 立即处理首次请求
-    with st.spinner("专家正在观察您的植物..."):
+    with st.spinner("Protamind正在观察您的植物..."):
         # 1. 将图片转为 Base64
         image_base64 = base64.b64encode(image_buffer.getvalue()).decode("utf-8")
         
@@ -156,7 +156,7 @@ if not st.session_state.messages and image_buffer:
             assistant_response_safe = apply_geopolitical_guardrail(assistant_response)
         # 5. 将模型的完整回复存入历史
         st.session_state.messages.append({"role": "assistant", "content": assistant_response_safe})
-        st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+        
         st.rerun() # 刷新一下，让chat_input出现
 
 # --- 对话输入框 ---
@@ -175,9 +175,9 @@ if len(st.session_state.messages) > 0:
             response_generator = get_llava_response(full_history)
             assistant_response = st.write_stream(response_generator)
             assistant_response_safe = apply_geopolitical_guardrail(assistant_response)
-        st.session_state.messages.append({"role": "assistant", "content": assistant_response_safe})
+        
         # 3. 将新回复存入历史
-        st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+        st.session_state.messages.append({"role": "assistant", "content": assistant_response_safe})
 
 # --- 重置按钮 ---
 if len(st.session_state.messages) > 0:
