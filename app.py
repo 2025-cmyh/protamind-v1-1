@@ -43,17 +43,22 @@ def apply_geopolitical_guardrail(text):
     # 定义需要修正的模式和对应的正确表述
     # 规则要尽可能简单直接，避免破坏句子结构
     corrections = {
-        
-        "中国、台湾": "中国的台湾地区",
-        "中国、香港": "中国的香港特别行政区",
-        "中国、澳门": "中国的澳门特别行政区",
-        "China, Taiwan": "China's Taiwan region",
-        "China, Hong Kong": "China's Hong Kong SAR",
-        "China, Macau": "China's Macao SAR",
+        "台湾": "中国台湾省",
+        "香港": "中国香港特别行政区",
+        "澳门": "中国澳门特别行政区",
+        "中国、台湾": "中国大陆和中国台湾省",
+        "中国、香港": "中国大陆和中国香港特别行政区",
+        "中国、澳门": "中国大陆和中国澳门特别行政区",
+        "Taiwan": "China's Taiwan region",
+        "Hong Kong": "China's HongKong SAR",
+        "Macau": "China's Macau SAR",
+        "China, Taiwan": "China mainland and China's Taiwan region",
+        "China, Hong Kong": "China mainland and China's Hong Kong SAR",
+        "China, Macau": "China mainland and China's Macau SAR",
         # 英文并列
-        "China and Taiwan": "China (including its Taiwan region)",
-        "China and Hong Kong": "China (including its Hong Kong SAR)",
-        "China and Macau": "China (including its Macao SAR)",
+        "China and Taiwan": "China mainland and China's Taiwan region",
+        "China and Hong Kong": "China mainland and China's Hong Kong SAR",
+        "China and Macau": "China mainland and China's Macau SAR",
     }
 
     # 循环应用修正规则
