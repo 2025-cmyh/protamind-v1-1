@@ -112,7 +112,7 @@ def get_llava_response(messages):
             yield chunk.choices[0].delta.content
 
 # --- Streamlit 主界面 ---
-st.title("🌿 ProtaMind-Experts for plant identification")
+st.title("🌿 ProtaMind-Your expert for plant identification")
 st.caption("Start your exploration!")
 
 # --- 对话历史记录展示 ---
