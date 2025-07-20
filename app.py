@@ -132,7 +132,7 @@ for message in st.session_state.messages:
 # 将上传控件放在主界面，流程更清晰
 image_buffer = st.file_uploader(
     "上传您的植物图片...", 
-    type=['png', 'jpg', 'jpeg'],
+    type=['png', 'jpg', 'jpeg', 'webp'],
     # 当对话开始后，禁用上传，除非用户选择重置
     disabled=len(st.session_state.messages) > 0
 )
